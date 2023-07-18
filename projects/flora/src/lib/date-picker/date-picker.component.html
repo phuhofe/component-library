@@ -1,0 +1,35 @@
+<form [formGroup]="form">
+  <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+    <div class="date-picker-field-padding">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{dateLabel}}</mat-label>
+        <div class="date-picker-input">
+          <input data-cy="date-input" matInput type="text" placeholder="{{dateLabel}}" formControlName="date" [value]="dateSelected" />
+          <button class="date-btn" (click)="toggleDatePicker()" type="button" cdkOverlayOrigin
+            #trigger="cdkOverlayOrigin">
+            <mat-icon aria-hidden="true" class="date-picker-icon">date_range</mat-icon>
+          </button>
+        </div>
+        <mat-error>
+          <span *ngIf="form.get('date').hasError('invalidDate')">{{invalidDate}}</span>
+        </mat-error>
+      </mat-form-field>
+
+      <ng-template cdkConnectedOverlay [cdkConnectedOverlayHasBackdrop]="true"
+        [cdkConnectedOverlayBackdropClass]="'date-picker-backdrop'" [cdkConnectedOverlayOrigin]="trigger"
+        [cdkConnectedOverlayOpen]="!isCollapsed" (backdropClick)="isCollapsed = true">
+        <div class="date-content" [ngClass]="{ active: !isCollapsed }">
+          <mat-card class="calendar-card">
+            <mat-calendar #calendar [startView]="'multi-year'" [(selected)]="selected" [maxDate]="today"
+              (yearSelected)="onYearSelected($event, calendar)" (monthSelected)="onMonthSelected($event)">
+            </mat-calendar>
+            <div class="date-picker-button">
+              <button mat-button class="cancel-btn" (click)="toggleDatePicker()">{{cancelButton}}</button>
+              <button mat-raised-button color="primary" (click)="onConfirm()">{{applyButton}}</button>
+            </div>
+          </mat-card>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</form>

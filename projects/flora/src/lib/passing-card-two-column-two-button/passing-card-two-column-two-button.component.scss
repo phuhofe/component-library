@@ -1,0 +1,250 @@
+@import 'projects/flora/src/styles/shared';
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  color: var(--color-shade-800);
+  position: relative;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  align-content: start;
+
+  > .order-person {
+    display: block;
+    max-width: 100%;
+    flex-grow: 1;
+  }
+
+  > .order-person > .order-person-link {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  > .order-person-actions {
+    list-style: none;
+    padding: 0 0 0 1em;
+    margin: 0;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 1em;
+  }
+
+  > .order-person-actions > .order-person-action {
+    height: 100%;
+    display: block;
+
+    .order-person-action-link {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      align-content: start;
+      text-decoration: none;
+      color: inherit;
+      transform: scale(1);
+      transition-duration: 150ms;
+      transition-property: transform;
+      transition-timing-function: ease-in-out;
+
+      &:active {
+        transition-duration: 50ms;
+        transform: scale(0.99);
+      }
+
+      &[disabled] {
+        cursor: default;
+      }
+    }
+
+    .order-person-action-label {
+      margin: 0.25em 0 0;
+      line-height: 1;
+      position: relative;
+      color: inherit;
+    }
+
+    > .order-person-action-link[disabled] .order-person-action-label {
+      opacity: 0.33;
+    }
+
+    .icon {
+      position: relative;
+      width: 2.5em;
+      height: 2.5em;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      align-content: start;
+      color: var(--color-white);
+      padding: 0.5em;
+      transition-duration: 150ms;
+      transition-property: color;
+      transition-timing-function: ease-in-out;
+
+      @media (min-width: 1024px) {
+        padding: 0.75em;
+        width: 3em;
+        height: 3em;
+      }
+
+      .mat-icon {
+        position: relative;
+        color: currentColor;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          width: 100%;
+          height: 100%;
+          fill: currentColor;
+          color: currentColor;
+        }
+      }
+
+      .background {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 1;
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        border: 1px solid transparent;
+        background-color: var(--color-primary-500);
+        transition-duration: 150ms;
+        transition-property: border, background-color;
+        transition-timing-function: ease-in-out;
+      }
+    }
+
+    &:hover .icon,
+    .order-person-action-link:focus .icon {
+      color: var(--color-primary-500);
+    }
+
+    &:hover .icon .background,
+    .order-person-action-link:focus .icon .background {
+      border-color: var(--color-primary-500);
+      background-color: var(--color-primary-50);
+    }
+
+    .order-person-action-link[disabled] {
+      transform: scale(1);
+    }
+
+    .order-person-action-link[disabled] .icon,
+    &:hover .order-person-action-link[disabled] .icon {
+      color: var(--color-white);
+    }
+
+    .order-person-action-link[disabled] .icon .background {
+      background-color: var(--color-primary-500);
+      opacity: 0.25;
+    }
+  }
+
+  .info {
+    .info-title {
+      line-height: 1;
+      color: var(--color-shade-900);
+      font-weight: mat-font-weight($config, title);
+
+      @media (min-width: 480px) {
+        font-size: mat-font-size($config, title);
+      }
+    }
+
+    .info-title span {
+      font: inherit;
+    }
+
+    .info-sub p {
+      margin: 0;
+    }
+
+    .info-sub-ceremony {
+      margin: 0.25em 0 0;
+      padding-top: 1em;
+      border-top: 1px solid var(--color-shade-200);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+      color: var(--color-shade-700);
+    }
+
+    .info-sub-ceremony p {
+      display: flex;
+      flex-wrap: nowrap;
+
+      .icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        line-height: 1;
+        font-size: inherit;
+        vertical-align: middle;
+      }
+
+      .text {
+        display: inline-block;
+        line-height: 1;
+        vertical-align: middle;
+      }
+
+      .text + .icon,
+      .icon + .text {
+        margin-left: 0.25em;
+      }
+    }
+  }
+
+  .photo {
+    padding-right: 1em;
+    display: flex;
+    flex-shrink: 0;
+
+    img {
+      display: block;
+      height: 4em;
+      width: 4em;
+      max-width: 100%;
+      object-fit: cover;
+      border-radius: var(--border-radius-large);
+
+      @media (min-width: 480px) {
+        height: 6em;
+        width: 6em;
+      }
+
+      @media (min-width: 1024px) {
+        height: 7em;
+        width: 7em;
+      }
+    }
+  }
+}
+
+.wrapper > .order-person > .order-person-link:hover,
+.wrapper > .order-person > .order-person-link:focus {
+  .info-title {
+    text-decoration: underline;
+  }
+}

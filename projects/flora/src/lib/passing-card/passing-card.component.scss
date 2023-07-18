@@ -1,0 +1,276 @@
+@import 'projects/flora/src/styles/shared';
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  color: var(--color-shade-800);
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  align-content: flex-start;
+  flex-direction: column;
+
+  @media (min-width: 760px) {
+    flex-direction: row;
+  }
+
+  > .order-person {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    flex-grow: 1;
+
+    @media (min-width: 760px) {
+      width: auto;
+    }
+  }
+
+  > .order-person > .order-person-link {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  > .order-person-actions {
+    list-style: none;
+    padding: 0;
+    max-width: 100%;
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5em;
+    width: 100%;
+    margin: 1em 0 0;
+
+    @media (min-width: 480px) {
+      gap: 1em;
+    }
+
+    @media (max-width: 759px) {
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    @media (min-width: 760px) {
+      justify-content: end;
+      margin-top: 0;
+      width: auto;
+      gap: 1.5em;
+    }
+
+    @media (min-width: 1024px) {
+      gap: 3em;
+    }
+  }
+
+  > .order-person-actions > .order-person-action {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    .order-person-action-link {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      align-content: flex-start;
+      text-decoration: none;
+      color: inherit;
+      transform: scale(1);
+      transition-duration: 150ms;
+      transition-property: transform;
+      transition-timing-function: ease-in-out;
+
+      &:active {
+        transition-duration: 50ms;
+        transform: scale(0.99);
+      }
+
+      &[disabled] {
+        cursor: default;
+      }
+    }
+
+    .order-person-action-label {
+      margin: 0.5em 0 0;
+      line-height: 1;
+      position: relative;
+      color: inherit;
+      font-size: mat-font-size($config, caption);
+    }
+
+    > .order-person-action-link[disabled] .order-person-action-label {
+      opacity: 0.33;
+    }
+
+    .icon {
+      position: relative;
+      width: 2.5em;
+      height: 2.5em;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      align-content: flex-start;
+      color: var(--color-white);
+      padding: 0.5em;
+      transition-duration: 150ms;
+      transition-property: color;
+      transition-timing-function: ease-in-out;
+
+      @media (min-width: 360px) {
+        padding: 0.75em;
+        width: 3em;
+        height: 3em;
+      }
+
+      @media (min-width: 480px) {
+        padding: 1em;
+        width: 4em;
+        height: 4em;
+      }
+
+      .mat-icon {
+        position: relative;
+        color: currentColor;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          width: 100%;
+          height: 100%;
+          fill: currentColor;
+          color: currentColor;
+        }
+      }
+
+      .background {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 1;
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        border: 1px solid transparent;
+        background-color: var(--color-primary-500);
+        transition-duration: 150ms;
+        transition-property: border, background-color;
+        transition-timing-function: ease-in-out;
+      }
+    }
+
+    &:hover .icon,
+    .order-person-action-link:focus .icon {
+      color: var(--color-primary-500);
+    }
+
+    &:hover .icon .background,
+    .order-person-action-link:focus .icon .background {
+      border-color: var(--color-primary-500);
+      background-color: var(--color-primary-50);
+    }
+
+    .order-person-action-link[disabled] {
+      transform: scale(1);
+    }
+
+    .order-person-action-link[disabled] .icon,
+    &:hover .order-person-action-link[disabled] .icon {
+      color: var(--color-white);
+    }
+
+    .order-person-action-link[disabled] .icon .background {
+      opacity: 0.25;
+      background-color: var(--color-primary-500);
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+
+    .info-title {
+      margin: 0 0 0.5rem;
+      line-height: 1;
+      color: var(--color-shade-900);
+      font-weight: mat-font-weight($config, title);
+
+      @media (min-width: 480px) {
+        font-size: mat-font-size($config, title);
+      }
+    }
+
+    .info-title span {
+      font: inherit;
+    }
+
+    .info-sub {
+      display: flex;
+      flex-direction: column;
+
+      @media (min-width: 1024px) {
+        flex-direction: row;
+      }
+
+      p {
+        margin: 0;
+
+        @media (min-width: 1024px) {
+          margin-left: 0.5em;
+
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+      }
+
+      .death-city {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    padding-right: 1em;
+
+    img {
+      border-radius: 100%;
+      display: block;
+      height: 4em;
+      width: 4em;
+      max-width: 100%;
+      object-fit: cover;
+
+      @media (min-width: 360px) {
+        height: 6em;
+        width: 6em;
+      }
+    }
+  }
+}
+
+.wrapper > .order-person > .order-person-link:hover,
+.wrapper > .order-person > .order-person-link:focus {
+  .info-title {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,27 @@
+<footer>
+  <div class="footer-content">
+    <div class="footer-logo" *ngIf="logo">
+      <flora-logo imageSource="{{ logo }}"></flora-logo>
+    </div>
+    <div class="footer-text" *ngIf="description">
+      <p class="description" [innerHTML]="description"></p>
+      <a class="description-link" [target]="descriptionLink?.target" [attr.href]="descriptionLink?.link">{{ descriptionLink?.text }}</a>
+    </div>
+    <div class="footer-menu" *ngIf="menu && menu.length > 0">
+      <div class="footer-menu-link">
+        <p class="menu-heading" *ngIf="menu.length > 1">{{ menuHeading }}</p>
+        <ul>
+          <li *ngFor="let menu of menu; trackBy: trackById" itemprop="itemListElement">
+            <a [target]="menu?.target" [attr.href]="menu?.link">{{ menu?.text }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-menu-extra">
+        <ng-content select="[footerMenuExtra]"></ng-content>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <p>{{ copyright }}</p>
+    </div>
+  </div>
+</footer>

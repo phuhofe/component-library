@@ -1,0 +1,39 @@
+<section [ngClass]="'wrapper layout-' + layout">
+  <ul itemscope itemtype="https://schema.org/ItemList">
+    <meta itemprop="name" content="search results" />
+    <li *ngFor="let order of orders; trackBy: trackById" itemprop="itemListElement">
+      <div *ngIf="layout === SearchResultLayout.DEFAULT; then withDefaultLayout"></div>
+      <div *ngIf="layout === SearchResultLayout.TWO_COLUMN_TWO_BUTTON; then withTwoColumnTwoButtonLayout"></div>
+      <div *ngIf="layout === SearchResultLayout.TWO_COLUMN_FOUR_BUTTON; then withTwoColumnFourButtonLayout"></div>
+      <ng-template #withDefaultLayout>
+        <flora-passing-card [order]="order" [fallbackPhoto]="fallbackPhoto"></flora-passing-card>
+      </ng-template>
+      <ng-template #withTwoColumnTwoButtonLayout>
+        <flora-passing-card-two-column-two-button [order]="order" [fallbackPhoto]="fallbackPhoto">
+        </flora-passing-card-two-column-two-button>
+      </ng-template>
+      <ng-template #withTwoColumnFourButtonLayout>
+        <flora-passing-card-two-column-four-button [order]="order" [fallbackPhoto]="fallbackPhoto">
+        </flora-passing-card-two-column-four-button>
+      </ng-template>
+    </li>
+  </ul>
+  <div *ngIf="orders.length !== 0" class="paginator">
+    <flora-paginator
+      aria-label="Select page"
+      [paging]="paginatorPaging"
+      [labels]="paginatorLabels"
+      [itemsPerPageOptions]="paginatorResultsPerPageOptions"
+      (pageChange)="changePage($event)"
+    ></flora-paginator>
+  </div>
+  <div *ngIf="orders.length === 0" class="no-results-wrapper">
+    <mat-card class="no-results-card">
+      <mat-card-header>
+        <mat-card-title>{{ noResultsTitle }}</mat-card-title>
+        <mat-card-subtitle> {{ noResultsDescription }} </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="noResultsImage" [ngClass]="noResultsImagePadded ? 'padded' : ''" alt="" />
+    </mat-card>
+  </div>
+</section>

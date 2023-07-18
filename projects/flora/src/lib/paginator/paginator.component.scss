@@ -1,0 +1,54 @@
+.flora-paginator .wrapper > .inner {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas:
+    'paging-information page-changer'
+    'blank items-per-page';
+  justify-content: end;
+  align-items: center;
+  gap: 1em;
+
+  @media (min-width: 760px) {
+    grid-template-areas: 'items-per-page paging-information page-changer';
+    grid-template-columns: auto minmax(4em, auto) auto;
+  }
+}
+
+.flora-paginator .items-per-page-options {
+  grid-area: items-per-page;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.flora-paginator .paging-information {
+  grid-area: paging-information;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    display: flex;
+    justify-content: center;
+    gap: 0.5ch;
+    margin: 0;
+  }
+}
+
+.flora-paginator .paging-information.hidden {
+  display: none;
+}
+
+.flora-paginator .paging-information.range-hidden p > span:last-child {
+  display: none;
+}
+
+.flora-paginator .page-changer {
+  grid-area: page-changer;
+}

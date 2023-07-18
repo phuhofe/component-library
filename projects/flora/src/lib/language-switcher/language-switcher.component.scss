@@ -1,0 +1,38 @@
+.language-switcher {
+  position: relative;
+  display: inline-block;
+}
+
+.language-switcher-button {
+  position: relative;
+  z-index: 1;
+}
+
+.language-flag {
+  display: inline-block;
+  width: 1.6em;
+  height: 1.2em;
+  border-radius: var(--border-radius-small);
+  margin-right: 0.8em;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+button.hide-text-on-mobile {
+  @media (max-width: 759px) {
+    min-width: 0;
+    padding: 0 0.5em;
+  }
+}
+
+.hide-text-on-mobile {
+  @media (max-width: 759px) {
+    .language-text {
+      display: none;
+    }
+
+    .language-flag {
+      margin-right: 0;
+    }
+  }
+}

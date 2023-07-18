@@ -1,0 +1,70 @@
+<div class="flora-settings-modal wrapper">
+  <flora-card [padding]="cardPaddingSize.OFF">
+    <div class="flora-settings-modal inner">
+      <nav class="flora-settings-modal nav-sidebar">
+        <ul class="flora-settings-modal list">
+          <li class="flora-settings-modal list-item nav-sidebar-header">
+            <h1 class="flora-settings-modal title">{{ title }}</h1>
+            <button
+              id="flora-settings-modal-close-button-mobile"
+              mat-icon-button
+              color="warn"
+              aria-label="Close modal"
+              type="button"
+              (click)="onModalCloseEvent()"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </li>
+          <li *ngFor="let page of pages" class="flora-settings-modal list-item">
+            <button
+              mat-button
+              type="button"
+              class="flora-settings-modal navigation-item"
+              [ngClass]="{ 'mat-flat-button': currentPage && page.slug === currentPage.slug }"
+              (click)="selectPage(page)"
+            >
+              <mat-icon>{{ page.icon }}</mat-icon>
+              {{ page.title }}
+            </button>
+          </li>
+          <li class="flora-settings-modal list-item list-item-last">
+            <flora-language-switcher
+              [defaultLanguage]="defaultLanguage"
+              [availableLanguages]="availableLanguages"
+              (languageSelected)="onChangedLanguage($event)"
+            ></flora-language-switcher>
+          </li>
+        </ul>
+      </nav>
+      <section class="flora-settings-modal page-content" [ngClass]="{ 'page-content-open': currentPage !== null }">
+        <header class="flora-settings-modal page-content-header">
+          <div class="flora-settings-modal page-content-header-buttons">
+            <button class="flora-settings-modal back-to-nav-button" mat-button mat-stroked-button (click)="selectPage(null)">
+              <mat-icon>menu_open</mat-icon>
+              {{ title }}
+            </button>
+            <button
+              id="flora-settings-modal-close-button-desktop"
+              mat-icon-button
+              color="warn"
+              aria-label="Close modal"
+              type="button"
+              (click)="onModalCloseEvent()"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <ng-content select="[header]"></ng-content>
+        </header>
+        <mat-divider></mat-divider>
+        <div class="flora-settings-modal">
+          <ng-content select="[content]"></ng-content>
+        </div>
+      </section>
+      <footer class="flora-settings-modal actions">
+        <ng-content select="[footer]"></ng-content>
+      </footer>
+    </div>
+  </flora-card>
+</div>

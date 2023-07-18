@@ -1,0 +1,44 @@
+.flora-cookie-pop-up .content {
+  .cookie-category {
+    margin-top: 1em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+.flora-cookie-pop-up .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  justify-content: center;
+
+  @media (min-width: 480px) {
+    gap: 1em;
+  }
+
+  button,
+  .mat-button,
+  .mat-flat-button,
+  .mat-primary {
+    flex-grow: 1;
+  }
+
+  .primary-actions,
+  .other-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 0.5em;
+
+    @media (min-width: 480px) {
+      gap: 1em;
+    }
+  }
+
+  .mat-button-base {
+    margin: 0;
+  }
+}

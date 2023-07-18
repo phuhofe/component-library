@@ -1,0 +1,259 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  position: relative;
+  font-size: 16px; // This is only supposed to change EM scaling, as the actual text font size is handeled by angular material's styles
+
+  input[type='checkbox'] {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    font-size: 1px;
+    width: 1px;
+    height: 1px;
+    background-color: transparent;
+    border: none;
+    opacity: 0.01;
+  }
+
+  label {
+    cursor: pointer;
+    display: grid;
+    flex-grow: 1;
+    grid-template-areas: 'checkbox';
+    grid-template-columns: 2em;
+    grid-template-rows: 2em;
+  }
+
+  &.has-title,
+  &.has-description,
+  &.has-icon {
+    &.size-comfortable label {
+      grid-template-columns: 3em 1em auto 1em 2em;
+      grid-template-rows: auto auto;
+    }
+
+    &.size-compact label {
+      grid-template-columns: 3em 1em auto 1em 2em;
+      grid-template-rows: auto 0.5em auto;
+    }
+  }
+
+  &.has-title {
+    &.size-comfortable label {
+      grid-template-areas:
+        'title title title x2 checkbox'
+        'title title title x2 checkbox';
+    }
+
+    &.size-compact label {
+      grid-template-areas:
+        'title title title x2 checkbox'
+        'rowSpace rowSpace rowSpace rowSpace rowSpace'
+        'title title title description description';
+    }
+  }
+
+  &.has-title.has-description {
+    &.size-comfortable label {
+      grid-template-areas:
+        'title title title x2 checkbox'
+        'description description description x2 checkbox';
+    }
+
+    &.size-compact label {
+      grid-template-areas:
+        'title title title x2 checkbox'
+        'rowSpace rowSpace rowSpace rowSpace rowSpace'
+        'description description description description description';
+    }
+  }
+
+  &.has-title.has-icon {
+    &.size-comfortable label {
+      grid-template-areas:
+        'icon x1 title x2 checkbox'
+        'icon x1 title x2 checkbox';
+    }
+
+    &.size-compact label {
+      grid-template-areas:
+        'icon x1 title x2 checkbox'
+        'rowSpace rowSpace rowSpace rowSpace rowSpace'
+        'x3 x3 title x4 x4';
+    }
+  }
+
+  &.has-description.has-icon {
+    &.size-comfortable label {
+      grid-template-areas:
+        'icon x1 description x2 checkbox'
+        'icon x1 description x2 checkbox';
+    }
+
+    &.size-compact label {
+      grid-template-areas:
+        'icon x1 x3 x2 checkbox'
+        'rowSpace rowSpace rowSpace rowSpace rowSpace'
+        'description description description description description';
+    }
+  }
+
+  &.has-title.has-description.has-icon {
+    &.size-comfortable label {
+      grid-template-areas:
+        'icon x1 title x2 checkbox'
+        'icon x1 description x2 checkbox';
+    }
+
+    &.size-compact label {
+      grid-template-areas:
+        'icon x1 title x2 checkbox'
+        'rowSpace rowSpace rowSpace rowSpace rowSpace'
+        'description description description description description';
+    }
+  }
+
+  .title-wrapper {
+    display: none;
+  }
+  &.has-title .title-wrapper {
+    grid-area: title;
+    display: block;
+    align-self: center;
+    justify-self: start;
+    line-height: 1;
+  }
+
+  .description-wrapper {
+    display: none;
+  }
+  &.has-description .description-wrapper {
+    grid-area: description;
+    display: flex;
+    align-items: start;
+    justify-items: center;
+    white-space: break-spaces;
+    flex-direction: column;
+  }
+
+  .icon-wrapper {
+    display: none;
+  }
+  &.has-icon .icon-wrapper {
+    grid-area: icon;
+    display: flex;
+    width: 100%;
+    height: 3em;
+    line-height: 3em;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    border-radius: var(--border-radius-medium);
+
+    .mat-icon {
+      font-size: 2em;
+      width: 1em;
+      height: 1em;
+    }
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  &.icon-color-primary .icon-wrapper {
+    color: var(--color-primary-500);
+    background-color: var(--color-primary-50);
+  }
+
+  &.icon-color-shade .icon-wrapper {
+    color: var(--color-shade-800);
+    background-color: var(--color-shade-200);
+  }
+
+  .checkbox-wrapper {
+    grid-area: checkbox;
+    width: 100%;
+    height: 2em;
+    border-radius: var(--border-radius-small);
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-shade-50);
+    background-color: var(--color-shade-50);
+    border: 2px solid var(--color-shade-200);
+
+    .icon {
+      width: 1.5em;
+      height: 1.5em;
+      line-height: 1.5;
+      align-self: center;
+      display: flex;
+      justify-content: center;
+      border-radius: var(--border-radius-small);
+      background-color: var(--color-shade-800);
+    }
+
+    .unchecked-icon {
+      display: flex;
+    }
+
+    .checked-icon,
+    .indeterminate-icon {
+      display: none;
+    }
+  }
+
+  input[type='checkbox']:checked + label .checkbox-wrapper,
+  input[type='checkbox']:indeterminate + label .checkbox-wrapper {
+    color: var(--color-primary-50);
+    border-color: var(--color-primary-100);
+    background-color: var(--color-primary-50);
+
+    .icon {
+      background-color: var(--color-primary-500);
+    }
+  }
+
+  input[type='checkbox']:checked + label .checkbox-wrapper {
+    .checked-icon {
+      display: flex;
+    }
+
+    .unchecked-icon,
+    .indeterminate-icon {
+      display: none;
+    }
+  }
+
+  input[type='checkbox']:indeterminate + label .checkbox-wrapper {
+    .indeterminate-icon {
+      display: flex;
+    }
+
+    .unchecked-icon,
+    .checked-icon {
+      display: none;
+    }
+  }
+
+  &.has-title .checkbox-wrapper,
+  &.has-description .checkbox-wrapper,
+  &.has-icon .checkbox-wrapper {
+    margin-bottom: auto;
+    margin-left: auto;
+  }
+
+  &.is-disabled input[type='checkbox'] + label .checkbox-wrapper {
+    opacity: 0.75;
+    cursor: not-allowed;
+  }
+
+  &.is-readonly {
+    opacity: 0.75;
+  }
+}

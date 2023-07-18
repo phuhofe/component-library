@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <button mat-button mat-stroked-button [matMenuTriggerFor]="menu">
+    <mat-icon class="mobile-icon">{{ mobileIcon }}</mat-icon>
+    <span class="desktop-text">{{ desktopText }}</span>
+    <mat-icon class="desktop-icon">{{ desktopIcon }}</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <ng-content></ng-content>
+  </mat-menu>
+</div>

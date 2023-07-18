@@ -1,0 +1,37 @@
+.sort-items-wrapper {
+  margin-top: 1em;
+
+  .sort-items {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5em;
+
+    .sort-item button {
+      padding: 0;
+      border: none;
+      appearance: none;
+      cursor: pointer;
+      color: var(--color-shade-800);
+      font: inherit;
+      background-color: transparent;
+
+      &:hover,
+      &:focus,
+      &.selected {
+        color: var(--color-shade-900);
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.sort-button {
+  border-color: var(--color-primary-500);
+}
+
+.sort-items-backdrop {
+  background: inherit;
+}

@@ -1,0 +1,19 @@
+<div class="language-switcher">
+  <button
+    class="language-switcher-button"
+    type="button"
+    mat-button
+    [ngClass]="[buttonStyle]"
+    [color]="color"
+    [matMenuTriggerFor]="languageList"
+  >
+    <img class="language-flag" [src]="selectedLanguage.flag" alt="" />
+    <span class="language-text">{{ selectedLanguage.name }}</span>
+  </button>
+  <mat-menu #languageList="matMenu">
+    <button mat-menu-item *ngFor="let language of availableLanguages" [value]="language" (click)="onLanguageSelected(language)">
+      <img class="language-flag" [src]="language.flag" alt="" />
+      <span class="language-name">{{ language.name }}</span>
+    </button>
+  </mat-menu>
+</div>

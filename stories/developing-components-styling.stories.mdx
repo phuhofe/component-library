@@ -1,0 +1,57 @@
+import { Meta } from '@storybook/addon-docs';
+import IconMobileFirst from './assets/mobile-first.svg';
+import Icon8PtGrid from './assets/8-pt-grid.svg';
+import stylesheet from './style.css';
+
+<style>{stylesheet}</style>
+
+<Meta title="About/How to develop components/Styling" />
+
+# Styling
+
+- We are doing mobile first.
+- We are following the 4 point grid (same concept as 8 pt, just allowing for smaller spacings).
+- We use CSS variables (custom properties), not SASS/SCSS variables.
+- You need to use CSS variables for things like color, border radius and more. Check the `_variables.scss` file to see what is available.
+- We use `em` where we can, `px` as a backup or where `em` is not applicable.
+- We don't nest our SCSS too deep. Try to keep to a maximum of 3 levels.
+- We put media queries into the CSS class itself. We don't wrap multiple classes in a media query.
+- We never use global styles.
+- We normally use `ViewEncapsulation.Emulated` which scopes the styles to the component.
+  If you need to style Angular Material components you can use `ViewEncapsulation.NONE`, but then you need to prefix all your classes with the component selector.
+
+**Break points**
+
+- 360px (small mobile)
+- 480px (normal mobile)
+- 760px (large mobile / small tablet)
+- 1024px (normal tablet)
+- 1200px (large tablet / small laptop)
+
+## Next up
+
+1. [Intro](?path=/story/about-how-to-develop-components-intro--page)
+2. [Structure & naming](?path=/story/about-how-to-develop-components-structure-naming--page)
+3. **[Styling](?path=/story/about-how-to-develop-components-styling--page)**
+4. [Data](?path=/story/about-how-to-develop-components-data--page)
+5. [Icons](?path=/story/about-how-to-develop-components-icons--page)
+
+## Resources
+
+<div className="link-list">
+  <a className="link-item" href="https://spec.fm/specifics/8-pt-grid" target="_blank" rel="noopener">
+    <img src={Icon8PtGrid} alt="" />
+    <span>
+      <strong>8 point grid</strong>
+      Helps designers lay out UI quickly and consistently. Particularly helpful for mobile app UI where there are fixed constraints, useful for
+      responsive web design as well.
+    </span>
+  </a>
+  <a className="link-item" href="https://www.uxpin.com/studio/blog/a-hands-on-guide-to-mobile-first-design/" target="_blank" rel="noopener">
+    <img src={IconMobileFirst} alt="" />
+    <span>
+      <strong>Mobile first</strong>
+      The mobile-first approach is exactly as it sounds: designing for the smallest screen and working your way up.
+    </span>
+  </a>
+</div>

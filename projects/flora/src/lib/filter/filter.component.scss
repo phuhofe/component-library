@@ -1,0 +1,58 @@
+.w-100 {
+  width: 100%;
+}
+
+.content {
+  overflow: hidden;
+  display: block;
+  height: 0;
+  transition: all 0.2s;
+}
+
+.active {
+  height: auto;
+  padding: 1rem 0;
+  transition: all 0.2s;
+}
+
+.mat-calendar-body-cell-content {
+  &:hover {
+    color: #fff;
+  }
+
+  &.mat-calendar-body-selected {
+    color: #fff;
+  }
+
+  &.mat-calendar-body-in-range {
+    color: #fff;
+  }
+}
+
+.filter-field-padding {
+  padding: 0 1rem;
+
+  .mat-stroked-button {
+    border-color: var(--color-primary-500);
+  }
+}
+
+.action {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1rem;
+}
+
+.clear-btn-wrapper {
+  margin-right: 1rem;
+}
+
+:host::ng-deep {
+  .filter-field-padding {
+    .mat-form-field-outline-start,
+    .mat-form-field-outline-gap,
+    .mat-form-field-outline-end {
+      background-color: var(--color-white);
+    }
+  }
+}

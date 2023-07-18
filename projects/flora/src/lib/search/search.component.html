@@ -1,0 +1,84 @@
+<flora-card>
+  <form [formGroup]="searchForm" class="search-wrapper" (submit)="onSearchValueChange()">
+    <div class="search-left">
+      <label class="search-label">
+        <span class="search-label-text mat-display-1">{{ searchLabel }}</span>
+      </label>
+
+      <button
+        [disabled]="disableSearchButton"
+        type="submit"
+        class="search-button search-button-mobile"
+        mat-fab
+        color="primary"
+        aria-label="Search button"
+      >
+        <mat-icon class="search-icon">search</mat-icon>
+      </button>
+
+      <ng-container *ngIf="usingCustomTemplate; else defaultTemplate">
+        <ng-container *ngTemplateOutlet="customTemplate"></ng-container>
+      </ng-container>
+
+      <ng-template #defaultTemplate>
+        <mat-form-field appearance="legacy" [ngClass]="{ 'search-input': true, 'no-search-location': searchLocations.length < 2 }">
+          <mat-chip-list #chipList multiple formControlName="selectedKeywords">
+            <mat-chip
+              class="mat-chip-selected"
+              *ngFor="let keyword of keywords"
+              color="primary"
+              [selected]="true"
+              [removable]="true"
+              [value]="keyword"
+              (removed)="remove(keyword)"
+            >
+              {{ keyword }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+
+            <input
+              [placeholder]="placeholder"
+              #searchBoxInput
+              formControlName="currentSearchKey"
+              (blur)="addKeyword($event); searchBoxInput.value = ''"
+              (input)="onSearchValueInput($event)"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="addKeyword($event); searchBoxInput.value = ''"
+            />
+          </mat-chip-list>
+          <button *ngIf="keywords.length > 0" (click)="clearAll()" type="button" matSuffix mat-icon-button aria-label="Clear">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field [ngClass]="{ 'search-location': true, hidden: searchLocations.length < 2 }" appearance="legacy">
+          <mat-icon matPrefix>place</mat-icon>
+
+          <mat-select
+            formControlName="searchLocation"
+            panelClass="location-panel"
+            aria-label="Location select"
+            [(ngModel)]="selectedLocation"
+            (selectionChange)="locationChange($event)"
+          >
+            <mat-option *ngFor="let searchLocation of searchLocations; let i = index" [value]="searchLocation.value">
+              <i *ngIf="selectedLocation === searchLocation.value" class="bi bi-geo-alt"></i>
+              <span class="location-display-value">{{ searchLocation.label }}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-template>
+
+      <ng-template #customTemplate>
+        <ng-content select="[custom]"></ng-content>
+      </ng-template>
+    </div>
+
+    <div class="search-right">
+      <button [disabled]="disableSearchButton" type="submit" class="search-button search-button-desktop" aria-label="Search button">
+        <mat-icon class="search-icon">search</mat-icon>
+      </button>
+    </div>
+  </form>
+</flora-card>

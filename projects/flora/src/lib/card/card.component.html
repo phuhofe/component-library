@@ -1,0 +1,13 @@
+<div class="flora-card" [ngClass]="cardStyles">
+  <div class="flora-card-inner">
+    <div *ngIf="matCard; then matCardWrapper; else contentBlock"></div>
+    <ng-template #matCardWrapper>
+      <mat-card class="flora-card-mat-card">
+        <ng-container *ngTemplateOutlet="contentBlock"></ng-container>
+      </mat-card>
+    </ng-template>
+    <ng-template #contentBlock>
+      <ng-content></ng-content>
+    </ng-template>
+  </div>
+</div>

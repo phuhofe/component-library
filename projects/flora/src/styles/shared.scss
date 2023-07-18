@@ -1,0 +1,19 @@
+// This styling is shared between all components, be careful when you're editing this.
+// This is because the ShadowDOM blocks most inheretance
+
+@import '~@angular/material/theming';
+$config: mat-typography-config();
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: mat-font-size($config, body-1);
+  font-weight: mat-font-weight($config, body-1);
+}
+
+@include mat-base-typography($config);

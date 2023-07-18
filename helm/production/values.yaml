@@ -1,0 +1,12 @@
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0
+
+resources:
+  limits:
+    cpu: 30m
+    memory: 128Mi
+  requests:
+    cpu: 10m
+    memory: 64Mi

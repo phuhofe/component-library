@@ -1,0 +1,27 @@
+<button
+  (click)="isOpen = !isOpen"
+  class="sort-button"
+  [ngClass]="{ 'mat-flat-button': isOpen }"
+  mat-stroked-button
+  color="primary"
+  type="button"
+  cdkOverlayOrigin
+  #trigger="cdkOverlayOrigin"
+>
+  <span>
+    {{ label }}
+  </span>
+  <mat-icon>swap_vert</mat-icon>
+</button>
+
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayHasBackdrop]="true" [cdkConnectedOverlayBackdropClass]="'sort-items-backdrop'" [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen" (backdropClick)="isOpen = false">
+  <div class="sort-items-wrapper">
+    <flora-card [padding]="CardPaddingSize.SMALL">
+      <ul class="sort-items">
+        <li class="sort-item" *ngFor="let item of items">
+          <button [ngClass]="{ selected: selectedValue == item.value }" (click)="onSelect(item.value)">{{ item.displayValue }}</button>
+        </li>
+      </ul>
+    </flora-card>
+  </div>
+</ng-template>

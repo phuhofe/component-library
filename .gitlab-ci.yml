@@ -1,0 +1,29 @@
+variables:
+  DEPLOY_NAMESPACE: adstate
+  DEPLOY_NAME: component-library
+  SKIP_TESTS: "false"
+  SECURITY_SCAN: "false"
+  NPM_TOKEN: ${GITLAB_TOKEN}
+
+stages:
+  - build
+  - test
+  - release
+  - deploy
+  - stop
+
+.deploy:
+  tags:
+    - ads1
+
+.stop:
+  tags:
+    - ads1
+
+include:
+  - project: adstate_as/devops/gitlab-ci-templates
+    ref: v5.0.0
+    file: template/Deployment.gitlab-ci.yml
+  - project: adstate_as/devops/gitlab-ci-templates
+    ref: v5.0.0
+    file: NpmPackage.gitlab-ci.yml

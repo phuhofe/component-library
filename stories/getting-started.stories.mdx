@@ -1,0 +1,62 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="About/Getting started" />
+
+# Getting started
+
+## Using the components in you project
+
+The UI component library is available as an NPM package on
+[Gitlab](https://gitlab.com/adstate_as/adstate-design-system/component-library/-/packages/2687563).
+
+1. $ `echo @adstate_as:registry=https://gitlab.com/api/v4/packages/npm/ >> .npmrc`
+2. $ `npm install @adstate_as/flora --save`
+
+**Example usage:**
+
+example.module.ts:
+
+```ts
+import { SearchModule } from '@adstate_as/flora';
+
+@NgModule({
+  imports: [SearchModule],
+})
+export class ExampleModule {}
+```
+
+example.component.html:
+
+```html
+<flora-search></flora-search>
+```
+
+Remember to have Angular Materials and Material Icons installed and available in your project.
+
+## How to use components in an app while still in development
+
+Sometimes we need to work on application code and the UI component library at the same time. We can use `npm link` to link the UI component
+library with other project.
+
+Package linking is a two-step process:
+
+**In the UI component library**
+
+- `npm run pack`
+- `cd pack`
+- `npm link`
+
+**In the app**
+
+- `npm run link-ui`
+
+When this has been setup you can edit, transpile, run tests, or commit as usual in the component library.
+While you app runs with the changes you made right away. The symbolic links are local and will not be committed to git.
+
+When you want to go back to using a remote version, just run
+
+- `npm run unlink-ui`
+
+## Next up
+
+**[How to develop components](?path=/story/about-how-to-develop-components-intro--page)**

@@ -1,0 +1,12 @@
+<nav itemscope itemtype="https://schema.org/ItemList">
+  <meta itemprop="name" content="navigation" />
+  <div #left class="left">
+    <ng-content select="[left]"></ng-content>
+  </div>
+  <div #center class="center">
+    <ng-content select="[center]"></ng-content>
+  </div>
+  <div #right class="right">
+    <ng-content select="[right]"></ng-content>
+  </div>
+</nav>

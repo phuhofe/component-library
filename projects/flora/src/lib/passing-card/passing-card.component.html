@@ -1,0 +1,139 @@
+<flora-card>
+  <section class="wrapper" itemscope itemtype="https://schema.org/Person">
+    <header class="order-person">
+      <a
+        #orderPersonLink
+        [attr.href]="order?.person?.nameAndPhotoLink"
+        [attr.aria-label]="getA11YLabel(order?.person)"
+        class="order-person-link"
+        target="_blank"
+        rel="noopener"
+      >
+        <div class="photo">
+          <img #orderPersonPhoto data-cy="order-person-photo" alt="" [src]="loadingPhoto" itemprop="image" />
+        </div>
+        <div class="info" data-cy="user-item">
+          <h3 data-cy="person-name" class="info-title" itemprop="name">
+            <span>{{ order?.person?.firstName }}</span>
+            <span>{{ spacingCharacter }}</span>
+            <span>{{ order?.person?.lastName }}</span>
+          </h3>
+          <div class="info-sub">
+            <p class="mat-body-1">
+              <span *ngIf="order?.person?.birthdate" data-cy="person-birthdate" itemprop="birthDate">
+                {{ order.person.birthdate }}
+              </span>
+              <span *ngIf="order?.person?.birthdate && order?.person?.deathdate">{{ hyphenCharacter }}</span>
+              <span *ngIf="order?.person?.deathdate" data-cy="person-death-date" itemprop="deathDate">
+                {{ order?.person?.deathdate }}
+              </span>
+            </p>
+            <p
+              data-cy="person-deathcity"
+              [ngClass]="{ 'death-city': !order?.person?.birthdate && !order?.person?.deathdate }"
+              *ngIf="order?.person?.deathcity"
+              class="mat-body-1"
+              itemprop="deathPlace"
+            >
+              {{ order.person.deathcity }}
+            </p>
+          </div>
+        </div>
+      </a>
+    </header>
+    <ul class="order-person-actions">
+      <li
+        class="order-person-action order-person-action-death-notice"
+        itemprop="potentialAction"
+        itemscope
+        itemtype="https://schema.org/Action"
+      >
+        <a
+          #serviceDeathNotice
+          class="order-person-action-link"
+          [attr.href]="order?.services?.deathNotice?.url"
+          [attr.disabled]="order?.services?.deathNotice?.disabled ? true : null"
+          target="_blank"
+          rel="noopener"
+          itemprop="url"
+          data-cy="death-notice-action-link"
+        >
+          <div data-cy="death-notice-icon" class="icon">
+            <div class="background" matRipple [matRippleTrigger]="serviceDeathNotice"></div>
+            <mat-icon svgIcon="deathNotice" itemprop="image"></mat-icon>
+          </div>
+          <p class="order-person-action-label mat-caption" itemprop="name">{{ order?.services?.deathNotice?.label }}</p>
+        </a>
+      </li>
+      <li
+        class="order-person-action order-person-action-memorial-page"
+        itemprop="potentialAction"
+        itemscope
+        itemtype="https://schema.org/Action"
+      >
+        <a
+          #serviceMemorialPage
+          class="order-person-action-link"
+          [attr.href]="order?.services?.memorialPage?.url"
+          [attr.disabled]="order?.services?.memorialPage?.disabled ? true : null"
+          target="_blank"
+          rel="noopener"
+          itemprop="url"
+          data-cy="memorial-page-action-link"
+        >
+          <div class="icon">
+            <div class="background" matRipple [matRippleTrigger]="serviceMemorialPage"></div>
+            <mat-icon svgIcon="memorialPage" itemprop="image"></mat-icon>
+          </div>
+          <p class="order-person-action-label mat-caption" itemprop="name">{{ order?.services?.memorialPage?.label }}</p>
+        </a>
+      </li>
+      <li
+        class="order-person-action order-person-action-donation"
+        itemprop="potentialAction"
+        itemscope
+        itemtype="https://schema.org/Action"
+      >
+        <a
+          #serviceDonation
+          class="order-person-action-link"
+          [attr.href]="order?.services?.donation?.url"
+          [attr.disabled]="order?.services?.donation?.disabled ? true : null"
+          target="_blank"
+          rel="noopener"
+          itemprop="url"
+          data-cy="donation-action-link"
+        >
+          <div class="icon">
+            <div class="background" matRipple [matRippleTrigger]="serviceDonation"></div>
+            <mat-icon svgIcon="donation" itemprop="image"></mat-icon>
+          </div>
+          <p class="order-person-action-label mat-caption" itemprop="name">{{ order?.services?.donation?.label }}</p>
+        </a>
+      </li>
+      <li
+        class="order-person-action order-person-action-flower-shop"
+        itemprop="potentialAction"
+        itemscope
+        itemtype="https://schema.org/Action"
+      >
+        <a
+          #serviceFlowerShop
+          class="order-person-action-link"
+          [attr.href]="order?.services?.flowerShop?.url"
+          [attr.disabled]="order?.services?.flowerShop?.disabled ? true : null"
+          target="_blank"
+          rel="noopener"
+          itemprop="url"
+          data-cy="flowers-action-link"
+        >
+          <div class="icon">
+            <div class="background" matRipple [matRippleTrigger]="serviceFlowerShop"></div>
+            <mat-icon svgIcon="flowerShop" itemprop="image"></mat-icon>
+          </div>
+          <p class="order-person-action-label mat-caption" itemprop="name">{{ order?.services?.flowerShop?.label }}</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+</flora-card>

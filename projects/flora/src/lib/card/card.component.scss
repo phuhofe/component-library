@@ -1,0 +1,106 @@
+.flora-card {
+  background-color: #ffffff;
+  border-radius: var(--border-radius-large);
+  transition-duration: 250ms;
+  transition-property: box-shadow;
+  transition-timing-function: ease;
+  overflow: hidden;
+
+  &:hover,
+  &:focus {
+    transition-duration: 150ms;
+  }
+
+  .flora-card-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: flex-start;
+  }
+
+  &.padding {
+    &-none {
+      padding: 0;
+    }
+
+    &-sm {
+      padding: 0.25em;
+
+      @media (min-width: 360px) {
+        padding: 0.5em;
+      }
+
+      @media (min-width: 760px) {
+        padding: 1em;
+      }
+    }
+
+    &-md {
+      padding: 0.5em;
+
+      @media (min-width: 360px) {
+        padding: 1em;
+      }
+
+      @media (min-width: 760px) {
+        padding: 1.5em;
+      }
+    }
+
+    &-lg {
+      padding: 1em;
+
+      @media (min-width: 360px) {
+        padding: 1.5em;
+      }
+
+      @media (min-width: 760px) {
+        padding: 2em;
+      }
+    }
+  }
+
+  &.shadow {
+    &-none {
+      box-shadow: none;
+    }
+
+    &-sm {
+      box-shadow: 0 0.25em 1em -0.25em var(--shadow-sm);
+
+      &:hover,
+      &:focus,
+      &:focus-within {
+        box-shadow: 0 0.5em 2em -0.5em var(--shadow-sm-hover);
+      }
+    }
+
+    &-md {
+      box-shadow: 0 0.5em 2em -0.5em var(--shadow-md);
+
+      &:hover,
+      &:focus,
+      &:focus-within {
+        box-shadow: 0 1em 2em -0.5em var(--shadow-md-hover);
+      }
+    }
+
+    &-lg {
+      box-shadow: 0 1em 2em -0.5em var(--shadow-lg);
+
+      &:hover,
+      &:focus,
+      &:focus-within {
+        box-shadow: 0 1.5em 3em -0.75em var(--shadow-lg-hover);
+      }
+    }
+  }
+
+  .flora-card-mat-card {
+    box-shadow: none;
+    background-color: transparent;
+    width: 100%;
+    border-radius: var(--border-radius-large);
+  }
+}

@@ -1,0 +1,89 @@
+import { Meta } from '@storybook/addon-docs';
+import stylesheet from './style.css';
+
+<style>{stylesheet}</style>
+
+<Meta title="About/How to develop components/Structure & naming" />
+
+# Structure & naming
+
+To make a new component in the library, you will need 5 files.
+
+- `/projects/flora/src/lib/{COMPONENT_NAME}`
+  - `{COMPONENT_NAME}.component.spec.ts` (test)
+  - `{COMPONENT_NAME}.component.html` (view)
+  - `{COMPONENT_NAME}.component.scss` (style)
+  - `{COMPONENT_NAME}.component.ts` (defenition)
+  - `{COMPONENT_NAME}.module.ts` (exports and imports)
+- `/stories/{ATOMIC_DESIGN_SIZE}/{COMPONENT_NAME}.ts` (documentation)
+
+## Component defenition
+
+```ts
+@Component({
+  selector: 'flora-COMPONENT_NAME',
+  templateUrl: './COMPONENT_NAME.component.html',
+  styleUrls: ['./COMPONENT_NAME.component.scss'],
+})
+export class COMPONENT_NAMEComponent implements OnInit {
+  @Input() inputName: string;
+  @Output() onEventName = new EventEmitter();
+  componentAttribute: componentAttributeType = {};
+
+  constructor() {}
+  ngMethods; // all ng* methods
+
+  public exampleC(): returnType {}
+  public exampleD(): returnType {}
+  private exampleA(): returnType {}
+  private exampleB(): returnType {}
+}
+```
+
+Check out https://angular.io/guide/styleguide#member-sequence for more information on the ordering.
+
+**Example for a button component**
+
+```ts
+@Component({
+  selector: 'flora-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+})
+export class ButtonComponent implements OnInit {
+  @Input() label: string;
+  @Output() onClick = new EventEmitter();
+  private prefix: string = 'Label prefix';
+
+  constructor() {}
+
+  ngOnInit(): void {
+    this.setupButtonLabel();
+  }
+
+  // in the html: <div (click)="clickEvent($event, 'my-button-name')"></div>
+  clickEvent(event: any, buttonName: string): void {
+    this.onClick.emit(event, buttonName);
+  }
+
+  private setupButtonLabel(): void {
+    this.label = this.prefix + ' ' + this.label;
+  }
+}
+```
+
+Usage of the button component:
+
+```html
+<body>
+  <flora-button label="Click me!" (onClick)="() => console.log('The button was clicked')"></flora-button>
+</body>
+```
+
+## Next up
+
+1. [Intro](?path=/story/about-how-to-develop-components-intro--page)
+2. **[Structure & naming](?path=/story/about-how-to-develop-components-structure-naming--page)**
+3. [Styling](?path=/story/about-how-to-develop-components-styling--page)
+4. [Data](?path=/story/about-how-to-develop-components-data--page)
+5. [Icons](?path=/story/about-how-to-develop-components-icons--page)

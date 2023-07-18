@@ -1,0 +1,31 @@
+<form [action]="formAction" method="POST" (submit)="onSubmitEvent($event, null)">
+  <flora-card [padding]="cardPaddingSize.SMALL" [matCard]="true">
+    <mat-card-title [innerHTML]="title"></mat-card-title>
+    <mat-card-subtitle>
+      <ng-content select="[description]"></ng-content>
+    </mat-card-subtitle>
+    <mat-card-content class="content" *ngIf="!isShowCookieCategories">
+      <div class="cookie-category" *ngFor="let cookieCategory of cookieCategories">
+        <flora-setting-toggle
+          size="Compact"
+          [title]="cookieCategory.title"
+          [description]="cookieCategory.description"
+          [icon]="cookieCategory.icon"
+          [iconColor]="cookieCategory.iconColor"
+          [checked]="cookieCategory.checked"
+          [indeterminate]="cookieCategory.indeterminate"
+          [disabled]="cookieCategory.disabled"
+          (settingChange)="onChangeEvent($event, cookieCategory.slug)"
+        ></flora-setting-toggle>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="actions">
+      <div class="other-actions">
+        <ng-content select="[otherActions]"></ng-content>
+      </div>
+      <div class="primary-actions">
+        <ng-content select="[primaryActions]"></ng-content>
+      </div>
+    </mat-card-actions>
+  </flora-card>
+</form>

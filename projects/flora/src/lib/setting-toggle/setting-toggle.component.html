@@ -1,0 +1,44 @@
+<div
+  class="wrapper"
+  [ngClass]="{
+    'is-checked': checked,
+    'is-indeterminate': indeterminate,
+    'is-readonly': readonly,
+    'is-disabled': disabled,
+    'has-title': title,
+    'has-description': description,
+    'has-icon': icon,
+    'icon-color-shade': (icon && !iconColor) || (icon && iconColor === settingToggleIconColor.SHADE),
+    'icon-color-primary': icon && iconColor === settingToggleIconColor.PRIMARY,
+    'size-comfortable': size === settingToggleSize.COMFORTABLE || !size,
+    'size-compact': size === settingToggleSize.COMPACT
+  }"
+>
+  <input
+    [id]="id"
+    type="checkbox"
+    #checkbox
+    [attr.disabled]="disabled ? true : null"
+    [attr.readonly]="readonly ? true : null"
+    [checked]="checked ? true : null"
+    (change)="changeEvent($event)"
+  />
+  <label [for]="id">
+    <div class="icon-wrapper">
+      <mat-icon class="icon">{{ icon }}</mat-icon>
+    </div>
+    <div class="title-wrapper mat-body-2">{{ title }}</div>
+    <div class="description-wrapper mat-body-1" [innerHTML]="description"></div>
+    <div class="checkbox-wrapper">
+      <div class="icon unchecked-icon">
+        <mat-icon>close</mat-icon>
+      </div>
+      <div class="icon checked-icon">
+        <mat-icon>check</mat-icon>
+      </div>
+      <div class="icon indeterminate-icon">
+        <mat-icon>horizontal_rule</mat-icon>
+      </div>
+    </div>
+  </label>
+</div>

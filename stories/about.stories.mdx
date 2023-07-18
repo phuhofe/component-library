@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/addon-docs';
+import IconCode from './assets/code.svg';
+import IconStart from './assets/start.svg';
+import IconMaterialIcons from './assets/material-icons.svg';
+import IconAngularMaterial from './assets/angular-material-logo.svg';
+import stylesheet from './style.css';
+
+<style>{stylesheet}</style>
+
+<Meta title="About/About" />
+
+# Adstate component library
+
+## About the library
+
+**Why does this UI Library exist?**
+
+To unify and maintain consistency of the most commonly used UI elements at Adstate and to provide a platform for collaborative constant improvement. It's a part of the whole Design System.
+
+This part of the Design System is dedicated to **application development**.
+
+<div className="link-list">
+  <a className="link-item" href="/story/about-getting-started--page">
+    <img src={IconStart} alt="plugin" />
+    <span>
+      <strong>Getting started</strong>
+      How to install and use the component library
+    </span>
+  </a>
+  <a className="link-item" href="/story/about-how-to-develop-components-intro--page">
+    <img src={IconCode} alt="plugin" />
+    <span>
+      <strong>Developing components</strong>
+      How to develop components for the library
+    </span>
+  </a>
+</div>
+
+## Angular Materials
+
+Our component library is based on Angular Materials V11; that means all their components should be avaialbe for use in
+our applications.
+
+<div className="link-list">
+  <a className="link-item" href="https://v11.material.angular.io/components/categories" target="_blank" rel="noopener">
+    <img src={IconAngularMaterial} alt="" />
+    <span>
+      <strong>Components overview</strong>
+      Material Design components for Angular
+    </span>
+  </a>
+  <a className="link-item" href="https://fonts.google.com/icons" target="_blank" rel="noopener">
+    <img src={IconMaterialIcons} alt="" />
+    <span>
+      <strong>Material Icons</strong>
+      Material design icons is the official icon set from Google
+    </span>
+  </a>
+</div>

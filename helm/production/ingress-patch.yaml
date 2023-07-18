@@ -1,0 +1,17 @@
+- op: add
+  path: /spec/tls/0/hosts/-
+  value: components.design.adstate.com
+
+- op: add
+  path: /spec/rules/-
+  value:
+    host: components.design.adstate.com
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: production-component-library
+              port:
+                number: 80

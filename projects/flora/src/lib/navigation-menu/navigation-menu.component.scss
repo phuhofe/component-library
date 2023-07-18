@@ -1,0 +1,20 @@
+.wrapper button {
+  @media (max-width: 759px) {
+    min-width: 0;
+    padding: 0 0.5em;
+  }
+}
+
+.wrapper .mobile-text,
+.wrapper .mobile-icon {
+  @media (min-width: 760px) {
+    display: none;
+  }
+}
+
+.wrapper .desktop-text,
+.wrapper .desktop-icon {
+  @media (max-width: 759px) {
+    display: none;
+  }
+}

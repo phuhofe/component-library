@@ -1,0 +1,15 @@
+// ! WARNING: DO NOT IMPORT ME IN ANY COMPONENT
+// ! This is a global stylesheet that will be loaded on the page
+// ! Loading it per component can tremendously downscale performance
+
+@import './variables';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f8f8f8;
+}

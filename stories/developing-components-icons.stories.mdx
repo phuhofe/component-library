@@ -1,0 +1,64 @@
+import { Meta } from '@storybook/addon-docs';
+import stylesheet from './style.css';
+
+<style>{stylesheet}</style>
+
+<Meta title="About/How to develop components/Icons" />
+
+# Icons
+
+We are using Material Icons (filled). See https://www.material.io/icons
+
+## Using icons in your component
+
+Add the following to your story file:
+
+```ts
+import { moduleMetadata } from '@storybook/angular'
+import { MatIconModule } from '@angular/material/icon'
+
+export default {
+  ...
+  decorators: [
+    moduleMetadata({
+      imports: [MatIconModule],
+    }),
+  ],
+} as Meta
+```
+
+## How to use custom icons
+
+Make sure the icon your need is present in: `/static/assets/images/flora/icons`
+
+Add the following to your component .ts file.
+
+```ts
+import { MatIconRegistry } from '@angular/material/icon'
+import { DomSanitizer } from '@angular/platform-browser'
+
+constructor(protected matIconRegistry: MatIconRegistry, protected domSanitizer: DomSanitizer) {
+  super({
+    icons: { keys: ['deathNotice', 'flowerShop', 'material/place', 'material/schedule'], matIconRegistry, domSanitizer },
+  });
+}
+```
+
+Using the icon:
+
+```html
+<mat-icon class="my-custom-class" svgIcon="deathNotice"></mat-icon>
+
+<mat-icon svgIcon="material/schedule"></mat-icon>
+```
+
+If you see that we use the same icon in several components, it should be considered added to the app module instead.
+Give your teammates a heads up if you spot this, so it can be discussed.
+
+## Next up
+
+1. [Intro](?path=/story/about-how-to-develop-components-intro--page)
+2. [Structure & naming](?path=/story/about-how-to-develop-components-structure-naming--page)
+3. [Styling](?path=/story/about-how-to-develop-components-styling--page)
+4. [Data](?path=/story/about-how-to-develop-components-data--page)
+5. **[Icons](?path=/story/about-how-to-develop-components-icons--page)**

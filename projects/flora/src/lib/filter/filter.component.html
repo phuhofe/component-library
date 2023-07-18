@@ -1,0 +1,180 @@
+<div>
+  <div class="filter-field-padding" fxLayout="row" fxLayoutAlign="end center">
+    <button
+      data-cy="filter-button-action"
+      mat-button
+      (click)="toggleFilter()"
+      [ngClass]="isCollapsed ? 'mat-stroked-button' : 'mat-flat-button'"
+      color="primary"
+    >
+      {{ filterButton }} <mat-icon aria-hidden="true">filter_alt</mat-icon>
+    </button>
+  </div>
+
+  <form [formGroup]="filterForm" (ngSubmit)="applyFilterForm()">
+    <div class="content" [ngClass]="{ active: !isCollapsed }">
+      <div *ngIf="usingCustomTemplate; else defaultTemplate">
+        <ng-container *ngTemplateOutlet="customTemplate"></ng-container>
+      </div>
+
+      <ng-template #defaultTemplate>
+        <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+          <div class="filter-field-padding" fxFlex="25%">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{ firstNameLabel }}</mat-label>
+              <input
+                data-cy="first-name-input"
+                matInput
+                placeholder="{{ firstNameLabel }}"
+                formControlName="firstName"
+                (keydown.enter)="applyFilterForm()"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="filter-field-padding" fxFlex="25%">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{ lastNameLabel }}</mat-label>
+              <input
+                data-cy="last-name-input"
+                matInput
+                placeholder="{{ lastNameLabel }}"
+                formControlName="lastName"
+                (keydown.enter)="applyFilterForm()"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="filter-field-padding" fxFlex="25%">
+            <flora-date-picker
+              data-cy="birthday-filter"
+              [isClearDate$]="isClearFilter$.asObservable()"
+              [dateLabel]="birthdateLabel"
+              [invalidDate]="invalidDate"
+              [cancelButton]="cancelButton"
+              [applyButton]="applyButton"
+              (dateChange)="birthDateChange($event)"
+            ></flora-date-picker>
+          </div>
+
+          <div class="filter-field-padding" fxFlex="25%">
+            <flora-date-picker
+              data-cy="deathday-filter"
+              [isClearDate$]="isClearFilter$.asObservable()"
+              [dateLabel]="deathdateLabel"
+              [invalidDate]="invalidDate"
+              [cancelButton]="cancelButton"
+              [applyButton]="applyButton"
+              (dateChange)="deathDateChange($event)"
+            ></flora-date-picker>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+          <div class="filter-field-padding" fxFlex="50%" (click)="$event.stopPropagation(); triggerCity.openPanel()">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>{{ regionLabel }}</mat-label>
+              <input
+                data-cy="region-input"
+                type="text"
+                placeholder="{{ regionLabel }}"
+                matInput
+                formControlName="cityId"
+                [matAutocomplete]="cityAuto"
+                #triggerCity="matAutocompleteTrigger"
+              />
+              <mat-autocomplete
+                autoActiveFirstOption
+                #cityAuto="matAutocomplete"
+                (focus)="closedPanel = true"
+                (optionSelected)="onSelectCity($event)"
+              >
+                <mat-option data-cy="region-options" *ngFor="let option of filteredCities" [value]="option">
+                  {{ option.name }}
+                </mat-option>
+              </mat-autocomplete>
+
+              <button *ngIf="!filterForm.controls['cityId'].value" type="button" matSuffix mat-icon-button aria-label="open-region">
+                <mat-icon>arrow_drop_down</mat-icon>
+              </button>
+
+              <button
+                *ngIf="filterForm.controls['cityId'].value"
+                type="button"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="clearCitySelect()"
+                color="primary"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+
+          <div
+            class="filter-field-padding"
+            fxFlex="50%"
+            (click)="onOpenRegionSelect(); $event.stopPropagation(); triggerRegion.openPanel()"
+          >
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>{{ cityLabel }}</mat-label>
+              <input
+                type="text"
+                placeholder="{{ cityLabel }}"
+                matInput
+                formControlName="regionId"
+                [matAutocomplete]="regionAuto"
+                #triggerRegion="matAutocompleteTrigger"
+                data-cy="city-input"
+              />
+              <mat-autocomplete autoActiveFirstOption #regionAuto="matAutocomplete" (optionSelected)="onSelectRegion($event)">
+                <mat-option data-cy="city-options" *ngFor="let option of filteredRegions" [value]="option">
+                  {{ option.name }}
+                </mat-option>
+              </mat-autocomplete>
+
+              <button
+                *ngIf="!filterForm.controls['regionId'].value"
+                type="button"
+                matSuffix
+                mat-icon-button
+                aria-label="open-region"
+                (click)="onOpenRegionSelect()"
+              >
+                <mat-icon>arrow_drop_down</mat-icon>
+              </button>
+
+              <button
+                *ngIf="filterForm.controls['regionId'].value"
+                type="button"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="clearRegionSelect()"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template #customTemplate>
+        <ng-content select="[custom]"></ng-content>
+      </ng-template>
+
+      <div class="action">
+        <div class="clear-btn-wrapper">
+          <button mat-stroked-button (click)="clearFilterForm()" type="button" color="basic">{{ clearButton }}</button>
+        </div>
+
+        <div>
+          <button data-cy="submit-filter" mat-flat-button color="primary" type="submit">
+            {{ applyButton }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

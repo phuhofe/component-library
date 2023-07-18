@@ -1,0 +1,69 @@
+import { Meta } from '@storybook/addon-docs';
+import IconComponentDriven from './assets/component-driven.svg';
+import IconAtomicDesign from './assets/atomic.svg';
+import IconMobileFirst from './assets/mobile-first.svg';
+import Icon8PtGrid from './assets/8-pt-grid.svg';
+import stylesheet from './style.css';
+
+<style>{stylesheet}</style>
+
+<Meta title="About/How to develop components/Intro" />
+
+# How to develop components
+
+1. We are following the atomic web design structure. You should familiarize yourself with the concept.
+2. Ideally the design of the component exsists in Figma before you start development.
+3. `git clone git@gitlab.com:adstate_as/adstate-design-system/component-library.git`.
+4. `npm install`
+5. `npm run ng g c NameOfYourComponent`
+6. Discard the auto generated changes in `/projects/flora/src/lib/flora.module.ts`
+7. Create a module file: `/projects/flora/src/lib/name-of-your-component/name-of-your-component.module.ts`
+   Add the following content:
+
+```ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NameOfYourComponentComponent } from './name-of-your-component.component';
+import { CardModule } from '../card/card.module';
+
+// CardModule is just added as example here, showing you how to use other components inside yours,
+// remove it if you don't need it
+@NgModule({
+  declarations: [NameOfYourComponentComponent],
+  imports: [CommonModule, CardModule],
+  exports: [NameOfYourComponentComponent],
+})
+export class NameOfYourComponentModule {}
+```
+
+8. Add your module to: `/projects/flora/src/public-api.ts`, like so: `export { NameOfYourComponentModule } from './lib/name-of-your-component/name-of-your-component.module';`
+9. Add a `name-of-your-component.stories.mdx` in `/stories/TYPE/name-of-your-component.stories.ts`.
+
+Feel free to look at the "Molecules / Passing Card" component for a good example.
+
+## Next up
+
+1. **[Intro](?path=/story/about-how-to-develop-components-intro--page)**
+2. [Structure & naming](?path=/story/about-how-to-develop-components-structure-naming--page)
+3. [Styling](?path=/story/about-how-to-develop-components-styling--page)
+4. [Data](?path=/story/about-how-to-develop-components-data--page)
+5. [Icons](?path=/story/about-how-to-develop-components-icons--page)
+
+## Resources
+
+<div className="link-list">
+  <a className="link-item" href="https://www.componentdriven.org/" target="_blank" rel="noopener">
+    <img src={IconComponentDriven} alt="" />
+    <span>
+      <strong>componentdriven.org</strong>
+      Learn the basics about Component Driven User Interfaces.
+    </span>
+  </a>
+  <a className="link-item" href="/story/about-atomic-design--page">
+    <img src={IconAtomicDesign} alt="" />
+    <span>
+      <strong>Atomic Design</strong>
+      What is atomic design and how do we use it?
+    </span>
+  </a>
+</div>

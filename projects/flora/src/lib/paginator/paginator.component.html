@@ -1,0 +1,36 @@
+<nav class="wrapper">
+  <div class="inner">
+    <div class="items-per-page-options">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ labels.itemsPerPage }}</mat-label>
+        <mat-select (selectionChange)="changePageSize($event)" [value]="paging.pageSize">
+          <mat-option [value]="itemsPerPageOption" *ngFor="let itemsPerPageOption of itemsPerPageOptions">
+            {{ itemsPerPageOption }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div
+      [ngClass]="{
+        'paging-information': true,
+        'range-hidden': !displayPagingInformationRange,
+        hidden: !displayPagingInformation
+      }"
+    >
+      <p>
+        <span>{{ paging.pageSize * paging.currentPage + 1 }} - {{ paging.pageSize * (paging.currentPage + 1) }}</span>
+        <span>{{ labels.elementsXOutOfY }} {{ paging.totalElements }}</span>
+      </p>
+    </div>
+    <div class="page-changer">
+      <button mat-button color="primary" (click)="previousPage()" [disabled]="!previousPageIsAvailable">
+        <mat-icon>chevron_left</mat-icon>
+        <span>{{ labels.previous }}</span>
+      </button>
+      <button mat-button color="primary" (click)="nextPage()" [disabled]="!nextPageIsAvailable">
+        <span>{{ labels.next }}</span>
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+</nav>

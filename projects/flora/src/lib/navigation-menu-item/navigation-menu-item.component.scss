@@ -1,0 +1,29 @@
+.flora-navigation-menu-item.wrapper {
+  padding: 0;
+}
+
+.flora-navigation-menu-item a,
+.flora-navigation-menu-item p {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0 1em;
+  margin: 0;
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+  height: 100%;
+
+  > span {
+    height: 1.5rem;
+    line-height: 1.5rem;
+  }
+
+  .mat-icon {
+    margin: 0;
+    width: 1em;
+    height: 1em;
+    font-size: 1.5rem;
+  }
+}
